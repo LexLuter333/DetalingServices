@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.services-list {
+  padding: 4rem 0;
+  background: var(--black);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* .services-list.home-specific {
+  background: linear-gradient(180deg, #151515 0%, #0f0f0f 100%);
+} */
+
+.services-list.home-specific h2 {
+  margin-bottom: 2.5rem;
+}
+
+.services-list .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.services-list h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.services-intro {
+  padding: 2rem 0;
+  /* background: linear-gradient(180deg, #151515 0%, #0f0f0f 100%); */
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.services-intro p {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 80%;
+  max-width: 100%;
+  margin: 0 auto;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.service-card {
+  padding: 2rem;
+  background: var(--light-bg);
+  border-radius: 8px;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 280px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 0 1px rgba(244, 89, 59, 0.8), 0 0 20px rgba(244, 89, 59, 0.25), 0 0 40px rgba(244, 89, 59, 0.15);
+}
+
+.service-card-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.service-card-footer span {
+  color: #f4593b;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-card-footer span {
+  transform: translateX(5px);
+}
+
+.service-card-link {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.service-header {
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.service-header h3 {
+  color: var(--secondary-color);
+  margin-bottom: 0.75rem;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.service-price {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-block;
+  margin: 0.5rem auto;
+  padding: 0.4rem 1rem;
+  background: rgba(244, 89, 59, 0.1);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.service-card p {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  flex: 1;
+  word-wrap: break-word;
+}
+
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 15px;
+  }
+
+  .services-list .container {
+    padding: 0 15px;
+  }
+}
+
+/* Category cards styles */
+.category-card {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.service-header h3 {
+  color: var(--secondary-color);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+.service-description {
+  color: #ccc;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+/* CTA Button */
+.services-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(244, 89, 59, 0.2);
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1.25rem 5rem;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #e04a2b 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.15rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(244, 89, 59, 0.3);
+  min-width: 80%;
+  text-align: center;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(244, 89, 59, 0.5);
+  background: linear-gradient(135deg, #e04a2b 0%, var(--secondary-color) 100%);
+}
+
+.cta-button:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .cta-button {
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    min-width: 280px;
+  }
+  
+  .service-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .service-description {
+    font-size: 0.95rem;
+  }
+}

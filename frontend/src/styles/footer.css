@@ -1,0 +1,151 @@
+.footer {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.footer-section {
+  text-align: left;
+}
+
+.footer-section h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.footer-section p {
+  color: #ccc;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-links li {
+  margin-bottom: 0.5rem;
+}
+
+.social-links a {
+  color: #ccc;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  color: var(--secondary-color);
+}
+
+.copyright {
+  text-align: center;
+  color: #999;
+  padding-top: 1rem;
+  border-top: 1px solid #444;
+  margin: 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .footer-section p {
+    font-size: 0.95rem;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .social-links li {
+    margin-bottom: 0;
+  }
+
+  .social-links a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(244, 89, 59, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover {
+    background: rgba(244, 89, 59, 0.2);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .copyright {
+    font-size: 0.9rem;
+    padding: 1rem 15px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 0 15px;
+    gap: 1.5rem;
+  }
+
+  .footer-section h3 {
+    font-size: 1rem;
+  }
+
+  .footer-section p {
+    font-size: 0.9rem;
+  }
+
+  .social-links {
+    gap: 0.5rem;
+  }
+
+  .social-links a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .copyright {
+    font-size: 0.85rem;
+    padding: 1rem 10px;
+  }
+}

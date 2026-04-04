@@ -1,0 +1,98 @@
+version: '3.9'
+
+# Production Docker Compose Configuration with HTTPS
+# Uses Caddy for automatic SSL certificates
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: deteleng-db-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-deteleng}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_DB: ${POSTGRES_DB:-deteleng}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-deteleng} -d ${POSTGRES_DB:-deteleng}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - deteleng-network
+
+  # Go Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: deteleng-backend-prod
+    restart: always
+    environment:
+      - SERVER_PORT=8080
+      - DATABASE_URL=postgres://${POSTGRES_USER:-deteleng}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-deteleng}?sslmode=disable
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET is required}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@deteleng.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:?ADMIN_PASSWORD is required}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-https://localhost,https://ваш_домен.com}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - deteleng-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # React Frontend (Production Build)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: deteleng-frontend-prod
+    restart: always
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-https://ваш_домен.com/api}
+    depends_on:
+      - backend
+    networks:
+      - deteleng-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Caddy Reverse Proxy with Automatic HTTPS
+  caddy:
+    image: caddy:2-alpine
+    container_name: deteleng-caddy-prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - deteleng-network
+
+volumes:
+  postgres_data:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+
+networks:
+  deteleng-network:
+    driver: bridge
